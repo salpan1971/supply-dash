@@ -640,6 +640,7 @@
     <div id="mk-line" class="mk-line">불러오는 중…</div>
     <div class="mk-kpis" id="mk-kpis"></div>
     <p class="note" id="mk-note"></p>
+    <div id="mk-collect-box" hidden style="margin-top:8px"><button type="button" class="btn-sm" id="mk-collect">크레온 자료 지금 받기</button> <span class="note" id="mk-collect-msg"></span></div>
   </section>
   <section class="card mk" id="mk-acc" data-tab="market">
     <h2>주체별 누적 순매수 <small>분석 종목 합계 · 억원</small></h2>
@@ -2584,6 +2585,22 @@ init();
     } catch (e) { box.className = 'crawl'; }
   }
   tick(); setInterval(tick, 10000);
+  // 시장 탭 「크레온 자료 지금 받기」: 이 컴퓨터에서 열었을 때만 보인다(공개 사이트에는 나타나지 않음)
+  const cb = document.getElementById('mk-collect'), cbox = document.getElementById('mk-collect-box'), cmsg = document.getElementById('mk-collect-msg');
+  if (cb && cbox) {
+    cbox.hidden = false;
+    cb.addEventListener('click', async () => {
+      if (!confirm('크레온에서 전체 종목 자료를 지금 받습니다. 장중이면 오늘 값은 임시값이고, 20:30 이후 한 번 더 확정합니다. 시작할까요?')) return;
+      cb.disabled = true; cmsg.textContent = '요청 중…';
+      try {
+        const r = await fetch('/api/collect', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Local-Analysis': '1' }, body: '{}' });
+        const j = await r.json();
+        if (!r.ok) { cmsg.textContent = j.error || '요청하지 못했습니다'; cb.disabled = false; return; }
+        cmsg.textContent = j.count + '종목 갱신을 요청했습니다. 위쪽 진행 막대에 진행 상황이 나옵니다. 1분 안에 시작하지 않으면 크레온이 관리자 권한으로 로그인돼 있는지 확인하세요.';
+        setTimeout(() => { cb.disabled = false; }, 60000);
+      } catch (e) { cmsg.textContent = '이 컴퓨터의 분석 서버(127.0.0.1)에 연결하지 못했습니다'; cb.disabled = false; }
+    });
+  }
 })();
 </script>
 </body>
