@@ -475,6 +475,11 @@
   html.tab-market .sd .mk .jtag.buy { color: #7ee2a8; } html.tab-market .sd .mk .jtag.wait { color: #a0c3ec; }
   html.tab-market .sd .mk .jtag.hold { color: #ffc285; } html.tab-market .sd .mk .jtag.no { color: #ff7a7a; }
   /* 광고 자리: 광고 코드가 들어오기 전에는 비어 있어 보이지 않음. 주소 끝에 ?ads=preview 를 붙이면 자리를 점선으로 확인 */
+  .seo-summary { margin: 28px 0 8px; color: #98a09c; font-size: 13px; line-height: 1.6; }
+  .seo-summary h2 { font-size: 15px; margin: 0 0 6px; color: #c9cdd1; }
+  .seo-summary h3 { font-size: 13px; margin: 10px 0 2px; color: #c9cdd1; }
+  .seo-summary ol { margin: 0; padding-left: 20px; columns: 2; column-gap: 24px; }
+  .seo-summary p { margin: 4px 0; }
   .ad-slot { margin: 14px 0; text-align: center; }
   .ad-slot:empty { display: none; }
   .ad-slot .ad-ph { border: 1px dashed #888; border-radius: 8px; padding: 22px 10px; color: #888; font-size: 12px; }
@@ -936,6 +941,16 @@
       </table>
     </div>
   </section>
+
+  <!--SEO-START-->
+  <section class="seo-summary" id="seo-summary" data-tab="market" aria-label="오늘의 수급 요약">
+    <h2>2026년 11월 26일 코스피·코스닥 수급 요약</h2>
+    <p id="seo-oneline">11/26 수급 · 코스피 외국인 1,090억 순매도, 기관 7,529억 순매수, 개인 1조 468억 순매도 / 코스닥 외국인 1,047억 순매도, 기관 2,344억 순매수, 개인 1,364억 순매도 · 외국인 순매수 1위 SK하이닉스, 기관 순매수 1위 삼성전자 (https://cash.d-star27.com/)</p>
+    <h3>외국인 순매수 상위 5</h3><ol><li>SK하이닉스 3,926억</li><li>삼성전기 920억</li><li>삼성전자우 690억</li><li>SK스퀘어 321억</li><li>주성엔지니어링 154억</li></ol><h3>외국인 순매도 상위 5</h3><ol><li>KB금융 475억</li><li>삼성전자 374억</li><li>현대차 363억</li><li>삼성SDI 289억</li><li>대한항공 287억</li></ol><h3>기관 순매수 상위 5</h3><ol><li>삼성전자 3,334억</li><li>SK하이닉스 900억</li><li>삼성전기 622억</li><li>SK스퀘어 354억</li><li>KB금융 305억</li></ol><h3>기관 순매도 상위 5</h3><ol><li>삼성E&amp;A 132억</li><li>심텍 80억</li><li>이수페타시스 79억</li><li>기아 47억</li><li>삼성전자우 45억</li></ol>
+    <h3>오늘 상한가 종목</h3><p>나노팀, 동양고속, 아리바이오랩, 에이유브랜즈, 윙스풋, 진코스텍, 천일고속, LK삼양, 하나에어로, 셀로맥스사이언스</p>
+    <p>코스피200과 코스닥 시가총액 상위 종목을 기준으로 집계한 참고 자료이며 거래소 전체 집계와 다릅니다. 투자 권유가 아닙니다.</p>
+  </section>
+  <!--SEO-END-->
 
   <p class="note disc"><span id="built"></span><span class="ver">화면 v20261027-시장탭 · </span>시트와 같은 규칙으로 계산한 참고 지표이며 투자 권유가 아닙니다. 수급은 거래소+NXT 전체 기준입니다.</p>
 </div>
@@ -3213,7 +3228,7 @@ window.addEventListener('hashchange', onTab); onTab();
 (function () {
   var b = document.getElementById('share-btn'); if (!b) return;
   b.addEventListener('click', function () {
-    var url = 'https://cash.d-star27.com/', data = { title: '수급 대시보드', text: '코스피200·코스닥 수급을 한눈에 보는 대시보드', url: url };
+    var one = document.getElementById('seo-oneline'), url = 'https://cash.d-star27.com/', data = { title: '수급 대시보드', text: (one ? one.textContent.replace(/\s*\(https?:[^)]*\)\s*$/, '') : '코스피200·코스닥 수급을 한눈에 보는 대시보드'), url: url };
     if (navigator.share) { navigator.share(data).catch(function () {}); return; }
     var done = function () { b.textContent = '링크 복사됨'; setTimeout(function () { b.textContent = '공유'; }, 1800); };
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done, function () { window.prompt('링크를 복사하세요', url); });
