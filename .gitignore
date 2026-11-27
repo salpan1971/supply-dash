@@ -1,0 +1,4 @@
+data/*
+!data/market.json
+reports/
+*.bak*
