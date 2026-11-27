@@ -499,6 +499,15 @@
   #mk-auth #au-msg:empty { display: none; }
   html.tab-market .sd #mk-sum h2 { margin-bottom: 10px; }
   html.tab-market .sd #mk-sum h2 small:empty { display: none; }
+  /* 시장 탭 아래쪽 구역 여백 줄이기 */
+  html.tab-market .sd .card.mk { padding-top: 28px; padding-bottom: 0; }
+  @media (max-width: 767px) { html.tab-market .sd .card.mk { padding-top: 20px; } }
+  html.tab-market .sd #mk-auth { padding-top: 24px; }
+  html.tab-market .sd #mk-sum { padding-top: 4px; }
+  html.tab-market .sd .mk h2 { margin-bottom: 12px; }
+  html.tab-market .sd .mk h2::before { margin-bottom: 8px; }
+  html.tab-market .sd #mk-sum h2 { margin-bottom: 10px; }
+  html.tab-market .sd .mk .mk-line { margin-bottom: 16px; }
   .au-kakao:hover { filter: brightness(.97); } .au-kakao:focus-visible { outline: 2px solid #1b1f27; outline-offset: 2px; } .au-kakao:disabled { opacity: .6; cursor: default; }
 </style>
 </head>
