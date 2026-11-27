@@ -486,6 +486,19 @@
   .au-out.is-in .au-mascot { width: clamp(110px, 22vw, 170px); margin-top: -8px; }
   .au-main { flex: 0 1 560px; min-width: 0; }
   .au-mascot { flex: none; width: clamp(140px, 36vw, 260px); height: auto; margin-left: clamp(0px, 6vw, 90px); }
+  /* 회원 영역 여백 줄이기 */
+  html.tab-market .sd #mk-auth { padding: 24px 0 4px; }
+  @media (max-width: 767px) { html.tab-market .sd #mk-auth { padding-top: 16px; } }
+  html.tab-market .sd #mk-auth h2 { margin-bottom: 8px; }
+  html.tab-market .sd #mk-auth h2::before { margin-bottom: 6px; }
+  html.tab-market .sd #mk-auth h2 small { margin-top: 4px; }
+  #mk-auth .au-out { gap: 10px; }
+  #mk-auth .au-mascot { margin-left: clamp(0px, 3vw, 40px); }
+  #mk-auth .au-main .note { margin: 4px 0 0; }
+  #mk-auth #au-agree-wrap, #mk-auth label.note { margin-top: 6px !important; }
+  #mk-auth #au-legacy { margin-top: 2px !important; }
+  #mk-auth .au-out.is-in .au-mascot { margin-top: -4px; }
+  html.tab-market .sd #mk-sum { padding-top: 32px; }
   .au-kakao:hover { filter: brightness(.97); } .au-kakao:focus-visible { outline: 2px solid #1b1f27; outline-offset: 2px; } .au-kakao:disabled { opacity: .6; cursor: default; }
 </style>
 </head>
