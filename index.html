@@ -482,6 +482,8 @@
 <style>
   .au-kakao { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; max-width: 320px; padding: 11px 16px; border: 0; border-radius: 8px; background: #FEE500; color: rgba(0,0,0,.85); font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; }
   .au-out { display: flex; align-items: center; gap: 20px; }
+  .au-out.is-in { align-items: flex-start; }
+  .au-out.is-in .au-mascot { width: clamp(110px, 22vw, 170px); margin-top: -8px; }
   .au-main { flex: 0 1 560px; min-width: 0; }
   .au-mascot { flex: none; width: clamp(140px, 36vw, 260px); height: auto; margin-left: clamp(0px, 6vw, 90px); }
   .au-kakao:hover { filter: brightness(.97); } .au-kakao:focus-visible { outline: 2px solid #1b1f27; outline-offset: 2px; } .au-kakao:disabled { opacity: .6; cursor: default; }
@@ -2996,7 +2998,7 @@ init();
   }
   async function paint(session) {
     const on = !!(session && session.user);
-    $('au-out').hidden = on; $('au-in').hidden = !on;
+    $('au-out').hidden = on; $('au-in').hidden = !on; document.querySelector('.au-out').classList.toggle('is-in', on);
     const um = on ? (session.user.user_metadata || {}) : {};
     $('au-who').textContent = on ? (um.name || um.nickname || um.full_name || session.user.email || '카카오 회원') : '';
     ME.approved = false; ME.admin = false; ME.loaded = false;
@@ -3038,7 +3040,12 @@ init();
     const { error } = await sb.auth.resetPasswordForEmail(em, { redirectTo: here });
     msg(error ? ko(error) : '비밀번호 재설정 메일을 보냈습니다.');
   });
-  $('au-logout').addEventListener('click', async () => { await sb.auth.signOut(); msg('로그아웃했습니다.'); });
+  $('au-logout').addEventListener('click', async () => {                 // 로그아웃: 서버 응답과 상관없이 이 기기의 로그인 기록을 지우고 새로 불러온다
+    msg('로그아웃 중…');
+    try { await Promise.race([sb.auth.signOut({ scope: 'local' }), new Promise((r) => setTimeout(r, 2000))]); } catch (e) { /* 아래에서 직접 지움 */ }
+    try { Object.keys(localStorage).filter((k) => /^sb-.*-auth-token/.test(k)).forEach((k) => localStorage.removeItem(k)); } catch (e) { /* 저장소 막힘 */ }
+    location.reload();
+  });
 })();
 </script>
 <style>
