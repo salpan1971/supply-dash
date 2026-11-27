@@ -480,6 +480,10 @@
   .seo-summary h3 { font-size: 13px; margin: 10px 0 2px; color: #c9cdd1; }
   .seo-summary ol { margin: 0; padding-left: 20px; columns: 2; column-gap: 24px; }
   .seo-summary p { margin: 4px 0; }
+  .warn-box { display: flex; gap: 10px; align-items: flex-start; margin: 14px 0; padding: 12px 14px; border: 1px solid #f0b429; border-left-width: 6px; border-radius: 8px; background: #2b2108; color: #ffe9a8; font-size: 14.5px; line-height: 1.65; }
+  .warn-box b { color: #ffd34d; }
+  .warn-box u { text-decoration-thickness: 2px; text-underline-offset: 3px; color: #fff3c4; }
+  .warn-box .warn-ic { font-size: 22px; line-height: 1.2; }
   .ad-slot { margin: 14px 0; text-align: center; }
   .ad-slot:empty { display: none; }
   .ad-slot .ad-ph { border: 1px dashed #888; border-radius: 8px; padding: 22px 10px; color: #888; font-size: 12px; }
@@ -553,11 +557,12 @@
     <button type="button" id="go-analysis" class="req-btn" hidden>분석 →</button>
   </section>
 
+  <div class="warn-box" data-tab="judge" role="note"><b class="warn-ic" aria-hidden="true">⚠</b><div><b>투자 유의</b> 이 화면의 구분(조건충족·관찰중·조건미달·제외)은 수급 자료를 정해진 규칙으로 계산한 <u>참고 지표일 뿐 매수·매도 추천이 아닙니다.</u> 투자 판단과 그에 따른 손익은 모두 본인 책임이며, 실제 주문과 연결되어 있지 않습니다.</div></div>
   <section class="card" id="jbasis" data-tab="judge">
     <h2>종합 판단 근거 — 기준선과 비교</h2>
-    <p class="note">네 가지 분석(① 수급 후보, ② 진입 확인, ③ 추세 확인, ④ 분석 보고서)이 아래 기준선을 넘는지 보고 매수진입·매수대기·매수보류·매수불가로 나눕니다. 기준선은 아래 「기준선 설정」에서 바꿀 수 있습니다.</p>
+    <p class="note">네 가지 분석(① 수급 후보, ② 진입 확인, ③ 추세 확인, ④ 분석 보고서)이 아래 기준선을 넘는지 보고 조건충족·관찰중·조건미달·제외로 나눕니다. 기준선은 아래 「기준선 설정」에서 바꿀 수 있습니다.</p>
     <ul class="jb" id="jb-list"></ul>
-    <p class="note"><b style="color:#0a7d3c">매수진입</b> 모든 기준 통과 · <b style="color:#1f5fbf">매수대기</b> 후보이고 반등·시가 확인 등을 기다리는 중 · <b style="color:#b45f00">매수보류</b> 추세 미확인·보고서 점수가 기준에 못 미침 · <b style="color:#b3261e">매수불가</b> 후보가 아니거나 무효·부정 보고서·유동성·투자경고 등. 수익을 보장하지 않으며 실제 주문과 연결되어 있지 않습니다.</p>
+    <p class="note"><b style="color:#0a7d3c">조건충족</b> 모든 기준 통과 · <b style="color:#1f5fbf">관찰중</b> 후보이고 반등·시가 확인 등을 기다리는 중 · <b style="color:#b45f00">조건미달</b> 추세 미확인·보고서 점수가 기준에 못 미침 · <b style="color:#b3261e">제외</b> 후보가 아니거나 무효·부정 보고서·유동성·투자경고 등. 수익을 보장하지 않으며 실제 주문과 연결되어 있지 않습니다.</p>
   </section>
 
   <details class="card" id="jset" data-tab="judge">
@@ -576,10 +581,10 @@
         <label><input type="checkbox" id="js-trend"> 추세 강세 필요: 종가가 20일선보다 8.5% 이상 위 &amp; 세력 5일 순매수가 20일 평균 거래대금의 2.5% 이하</label>
         <label><input type="checkbox" id="js-trendreb"> 오늘 반등 확인 필요: 종가가 직전 3거래일 최고 종가를 돌파</label>
       </fieldset>
-      <label>④ 분석 보고서: <select id="js-rep"><option value="optional">있으면 반영(없어도 진행)</option><option value="required">필수(없으면 매수대기)</option><option value="ignore">반영 안 함</option></select></label>
+      <label>④ 분석 보고서: <select id="js-rep"><option value="optional">있으면 반영(없어도 진행)</option><option value="required">필수(없으면 관찰중)</option><option value="ignore">반영 안 함</option></select></label>
       <label>보고서 점수가 <input type="number" id="js-buy" min="0" max="5" step="0.1" style="width:4.5rem"> 점 이상이면 진입 가능</label>
-      <label>보고서 점수가 <input type="number" id="js-block" min="0" max="5" step="0.1" style="width:4.5rem"> 점 미만이면 매수불가</label>
-      <label><input type="checkbox" id="js-flag"> 투자경고·위험, 관리종목, 거래정지 종목은 매수불가</label>
+      <label>보고서 점수가 <input type="number" id="js-block" min="0" max="5" step="0.1" style="width:4.5rem"> 점 미만이면 제외</label>
+      <label><input type="checkbox" id="js-flag"> 투자경고·위험, 관리종목, 거래정지 종목은 제외</label>
       <label>미확인 조건은 <select id="js-unk"><option value="pass">통과로 보고 표시만</option><option value="block">보류로 봄</option></select></label>
       <button type="button" id="js-reset">기본값으로 되돌리기</button>
     </div>
@@ -765,6 +770,7 @@
   <nav class="subnav" data-tab="streak" aria-label="이 탭 안의 구역">
     <button type="button" data-jump="limitup">상한가 종목</button><button type="button" data-jump="jlist">종합 판단별 검색</button><button type="button" data-jump="streak">연속 신호 목록</button>
   </nav>
+  <div class="warn-box" data-tab="streak" role="note"><b class="warn-ic" aria-hidden="true">⚠</b><div><b>투자 유의</b> 이 화면의 구분(조건충족·관찰중·조건미달·제외)은 수급 자료를 정해진 규칙으로 계산한 <u>참고 지표일 뿐 매수·매도 추천이 아닙니다.</u> 투자 판단과 그에 따른 손익은 모두 본인 책임이며, 실제 주문과 연결되어 있지 않습니다.</div></div>
   <section class="card" id="limitup" data-tab="streak">
     <h2>상한가 종목</h2>
     <p class="note" id="lu-note">그날 상한가로 마감한 종목을 모았습니다. 종목을 누르면 그 종목의 분석 화면으로 이동합니다.</p>
@@ -952,7 +958,8 @@
   </section>
   <!--SEO-END-->
 
-  <p class="note disc"><span id="built"></span><span class="ver">화면 v20261027-시장탭 · </span>시트와 같은 규칙으로 계산한 참고 지표이며 투자 권유가 아닙니다. 수급은 거래소+NXT 전체 기준입니다.</p>
+<div class="warn-box" role="note"><b class="warn-ic" aria-hidden="true">⚠</b><div><b>투자 유의</b> 이 화면의 구분(조건충족·관찰중·조건미달·제외)은 수급 자료를 정해진 규칙으로 계산한 <u>참고 지표일 뿐 매수·매도 추천이 아닙니다.</u> 투자 판단과 그에 따른 손익은 모두 본인 책임이며, 실제 주문과 연결되어 있지 않습니다.</div></div>
+    <p class="note disc"><span id="built"></span><span class="ver">화면 v20261027-시장탭 · </span>시트와 같은 규칙으로 계산한 참고 지표이며 투자 권유가 아닙니다. 수급은 거래소+NXT 전체 기준입니다.</p>
 </div>
 
 <nav class="tabbar" id="tabbar" aria-label="구역 이동">
@@ -1513,12 +1520,12 @@
     let o = SNAP.cache[d];
     if (!o) { try { const r = await fetch('data/strong/' + d + '.json', { cache: 'no-cache' }); o = await r.json(); SNAP.cache[d] = o; } catch (e) { $('streak-snap-note').textContent = d + ' 목록을 불러오지 못했습니다.'; return; } }
     const S = dash.data('summary'), now = {}; (S.data || []).forEach((r) => { now[r.code] = r; });
-    const dayVerdict = {};                                                   // 그날 종합 판단(매수진입·매수대기·매수보류·매수불가): 날짜별 판정 자료를 최신과 같은 규칙으로 계산
+    const dayVerdict = {};                                                   // 그날 종합 판단(조건충족·관찰중·조건미달·제외): 날짜별 판정 자료를 최신과 같은 규칙으로 계산
     try {
       if (!JL.cache[d]) JL.cache[d] = await (await fetch('data/judge/' + d + '.json', { cache: 'no-cache' })).json();
       pseudoRows(JL.cache[d]).forEach((pr) => { dayVerdict[pr.code] = finalJudge(pr, latestReport(pr.code, d)).label; });
     } catch (e) {}
-    const SK ={ watch: '관심 후보', wait: '반등 대기', hold: '매수 보류', ready: '진입 조건 충족', void: '후보 무효', '': '-' };
+    const SK ={ watch: '관심 후보', wait: '반등 대기', hold: '조건 미달', ready: '진입 조건 충족', void: '후보 무효', '': '-' };
     const tb = $('streak-snap').tBodies[0];
     tb.replaceChildren(...o.stocks.map((r) => {
       const tr = document.createElement('tr'); tr.dataset.key = r.c;
@@ -1558,7 +1565,7 @@
   const jsave = () => { keep(JKEY, JSON.stringify(JSET)); window.dispatchEvent(new Event('supply-judge')); };
   const condKey = (n) => /가격 반등/.test(n) ? 'rebound' : /순매수 합/.test(n) ? 'flowSum' : /순매수일/.test(n) ? 'flowDays' : /추격매수/.test(n) ? 'chase' : /손익비/.test(n) ? 'rr' : /유동성|거래정지/.test(n) ? 'liq' : /급등일/.test(n) ? 'surge' : null;
   const COND_KO = { rebound: '가격 반등 확인', flowSum: '5일 외국인+기관 순매수 합 > 0', flowDays: '5일 중 순매수일 ≥ 3일', chase: '추격매수 제한(다음날 시가 갭)', rr: '예상 손익비', liq: '유동성·거래정지' };
-  const JLAB = { buy: '매수진입', wait: '매수대기', hold: '매수보류', no: '매수불가' };
+  const JLAB = { buy: '조건충족', wait: '관찰중', hold: '조건미달', no: '제외' };
   const JCLS = { buy: 'v-buy', wait: 'v-wait4', hold: 'v-hold', no: 'v-no' };
 
   function finalJudge(cur, rep) {
@@ -1606,7 +1613,7 @@
     L.rep = { state: !rep ? 'none' : !repOn ? 'none' : repBlocked ? 'fail' : repLow ? 'warn' : 'pass',
       text: !rep ? '보고서 없음(' + (S.repMode === 'required' ? '필수로 설정됨' : S.repMode === 'ignore' ? '반영 안 함으로 설정됨' : '있으면 반영, 없어도 진행') + ')'
         : '점수 ' + rep.score + '점 · ' + rep.opinion + ' (진입 기준 ' + S.repBuy + '점 이상, 불가 기준 ' + S.repBlock + '점 미만)' + (!repOn ? ' · 반영 안 함으로 설정됨' : '') };
-    L.flags = { state: flags.length ? (S.blockFlags ? 'fail' : 'warn') : 'pass', text: flags.length ? flags.join(', ') + (S.blockFlags ? ' — 매수불가 설정' : ' (표시만)') : '이상 없음' };
+    L.flags = { state: flags.length ? (S.blockFlags ? 'fail' : 'warn') : 'pass', text: flags.length ? flags.join(', ') + (S.blockFlags ? ' — 제외 설정' : ' (표시만)') : '이상 없음' };
     let key;
     if (S.blockFlags && flags.length) { key = 'no'; why.push(flags.join('·') + ' 종목입니다'); }
     else if (cur.st === 'nodata') { key = 'no'; why.push(cur.reason || '자료가 맞지 않아 판단하지 않습니다'); }
@@ -1655,7 +1662,7 @@
   // ---- 강한진입 탭: 종합 판단별 목록 ----
   const JL = { key: 'all', q: '', strong: false, date: '', cache: {}, idx: null };
   const JV = ['강한 진입', '진입', '진입 준비', '관망', '대기'], JST = { n: '', w: 'watch', a: 'wait', h: 'hold', r: 'ready', v: 'void', x: 'nodata' };
-  const JSK = { '': '후보 없음', watch: '관심 후보', wait: '반등 대기', hold: '매수 보류', ready: '진입 조건 충족', void: '후보 무효', nodata: '데이터 부족' };
+  const JSK = { '': '후보 없음', watch: '관심 후보', wait: '반등 대기', hold: '조건 미달', ready: '진입 조건 충족', void: '후보 무효', nodata: '데이터 부족' };
   const JCN = ['가격 반등 확인', '최근 5일 외국인+기관 순매수 합 > 0', '최근 5일 중 순매수일 ≥ 3일', '추격매수 제한(다음날 시가 갭)', '예상 손익비 ≥ 2.0', '유동성(20일 평균 거래대금)'];
   // 날짜별 과거 자료 [코드, 이름, 신호 수, 판정 번호, 상태, 조건 6글자, 20일, 연속] 를 finalJudge 가 읽는 형태로 바꾼다
   function pseudoRows(J) {
@@ -1685,13 +1692,13 @@
     if (JL.date) { const J = JL.cache[JL.date]; if (!J) { $('jl-sum').textContent = JL.date + ' 자료를 불러오는 중…'; return; } rows = pseudoRows(J); asOf = JL.date; }
     const list = rows.map((r) => { const rp = latestReport(r.code, asOf), fj = finalJudge(r, rp); return { r, rp, fj }; });
     const cnt = { all: list.length, buy: 0, wait: 0, hold: 0, no: 0 }; list.forEach((x) => { cnt[x.fj.key]++; });
-    $('jl-chips').replaceChildren(...[['all', '전체'], ['buy', '매수진입'], ['wait', '매수대기'], ['hold', '매수보류'], ['no', '매수불가']].map(([k, t]) => {
+    $('jl-chips').replaceChildren(...[['all', '전체'], ['buy', '조건충족'], ['wait', '관찰중'], ['hold', '조건미달'], ['no', '제외']].map(([k, t]) => {
       const b = document.createElement('button'); b.type = 'button'; b.dataset.k = k; b.className = 'jl-chip ' + k; b.setAttribute('aria-pressed', JL.key === k ? 'true' : 'false'); b.textContent = t + ' ' + cnt[k]; return b;
     }));
     const q = JL.q.trim().toLowerCase();
     const shown = list.filter((x) => (JL.key === 'all' || x.fj.key === JL.key) && (!JL.strong || x.r.strong_streak >= 3) && (!q || x.r.name.toLowerCase().includes(q) || x.r.code.startsWith(q.toUpperCase())))
       .sort((a, b) => (JORDER[a.fj.key] - JORDER[b.fj.key]) || (b.r.strong_streak - a.r.strong_streak) || a.r.name.localeCompare(b.r.name, 'ko'));
-    $('jl-sum').textContent = shown.length + '종목' + (JL.key !== 'all' ? ' · ' + ({ buy: '매수진입', wait: '매수대기', hold: '매수보류', no: '매수불가' })[JL.key] : '') + ' (전체 ' + list.length + '종목 · 기준 ' + (rows[0] ? rows[0].asof : '') + ')' + (asOf ? ' · 그날 종가까지의 자료로 다시 계산한 과거 판정(종목 상태·일부 판정 라벨은 단순화, 그날 이전에 나온 분석 보고서만 반영)' : '');
+    $('jl-sum').textContent = shown.length + '종목' + (JL.key !== 'all' ? ' · ' + ({ buy: '조건충족', wait: '관찰중', hold: '조건미달', no: '제외' })[JL.key] : '') + ' (전체 ' + list.length + '종목 · 기준 ' + (rows[0] ? rows[0].asof : '') + ')' + (asOf ? ' · 그날 종가까지의 자료로 다시 계산한 과거 판정(종목 상태·일부 판정 라벨은 단순화, 그날 이전에 나온 분석 보고서만 반영)' : '');
     $('jl-table').tBodies[0].replaceChildren(...shown.map((x) => {
       const tr = document.createElement('tr'); tr.dataset.key = x.r.code;
       const c = (t) => { const td = document.createElement('td'); td.textContent = t; return td; };
@@ -2391,7 +2398,7 @@ function renderAll() {
     </div></section>`;
 
   h += `<section class="card" id="s-rule"><h2>진행 규칙</h2><div class="rules"><ol>
-    <li><b>후보</b>: 판단 탭의 <b>종합 판단</b>(① 수급 후보 + ② 진입 확인 + ③ 추세 확인 + ④ 분석 보고서)이 <b>매수진입</b>인 종목을 기본으로 보여 줍니다. 매수대기·매수보류·매수불가도 버튼으로 고를 수 있습니다. 기준선은 판단 탭의 「기준선 설정」에서 바꾸며 이 목록도 같이 바뀝니다. <b>매수진입은 규칙을 만족했다는 뜻이며 수익 보장이 아닙니다.</b> 다른 판정의 종목도 직접 담을 수는 있지만 이른 매수·추격매수 위험이 더 큽니다.</li>
+    <li><b>후보</b>: 판단 탭의 <b>종합 판단</b>(① 수급 후보 + ② 진입 확인 + ③ 추세 확인 + ④ 분석 보고서)이 <b>조건충족</b>인 종목을 기본으로 보여 줍니다. 관찰중·조건미달·제외도 버튼으로 고를 수 있습니다. 기준선은 판단 탭의 「기준선 설정」에서 바꾸며 이 목록도 같이 바뀝니다. <b>조건충족은 규칙을 만족했다는 뜻이며 수익 보장이 아닙니다.</b> 다른 판정의 종목도 직접 담을 수는 있지만 이른 매수·추격매수 위험이 더 큽니다.</li>
     <li><b>분할 매수</b>: 전체 투입금액을 N회로 나눠 <b>첫 매수 당일부터</b> 그날 종가로 체결. <b>균등분할</b>은 첫 매수일부터 일정 간격으로 자동 체결, <b>선택분할</b>은 2차부터 날짜를 직접 선택.</li>
     <li><b>손절</b>: 전체 물량의 <b>50% 진입 이후</b> 종가가 평균단가 <b>-10%</b> 이하가 되는 날 전량 매도(그날 종가). 50% 미만일 땐 손절 비활성.</li>
     <li><b>판단</b>: 현재 수익과 수급 지표(매집 5일선/20일선, 분산비, 고점 되돌림, 보유일수)로 보유·분할익절·전량익절을 안내.</li></ol></div></section>`;
@@ -2400,7 +2407,7 @@ function renderAll() {
   if (window.supplyJudge) stocks.forEach((r) => { jc[window.supplyJudge(r).key]++; });
   h += `<section class="card" id="s-cand"><h2>종합 판단 후보 종목</h2>
     <p class="note">판단 탭의 종합 판단(수급 후보 + 진입 확인 + 분석 보고서, 개인 기준선)으로 나눈 종목입니다. 판정 칸에 마우스를 올리면 이유가 보입니다.</p>
-    <div class="jl-chips2" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px">${[['buy', '매수진입'], ['wait', '매수대기'], ['hold', '매수보류'], ['no', '매수불가'], ['all', '전체']].map(([k, t]) => `<button class="jl-chip ${k}" data-jk="${k}" aria-pressed="${state.jkey === k}">${t} ${jc[k]}</button>`).join('')}</div>
+    <div class="jl-chips2" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px">${[['buy', '조건충족'], ['wait', '관찰중'], ['hold', '조건미달'], ['no', '제외'], ['all', '전체']].map(([k, t]) => `<button class="jl-chip ${k}" data-jk="${k}" aria-pressed="${state.jkey === k}">${t} ${jc[k]}</button>`).join('')}</div>
     <div class="row" style="margin-bottom:10px">
       <label>종목당 투입금액(원) <input type="number" id="defBudget" min="100000" step="1000000" value="${state.def.budget}" style="width:130px"></label>
       <label>분할 횟수 <select id="defN">${[2,3,4,5,6,8,10].map((k) => `<option ${k === state.def.n ? 'selected' : ''}>${k}</option>`).join('')}</select></label>
