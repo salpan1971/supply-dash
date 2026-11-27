@@ -15,12 +15,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: python3 scripts/build_static.py
+      - name: 올릴 그림과 글 만들기
+        run: |
+          python3 scripts/make_card.py
+          npx --yes playwright@1.49.0 install --with-deps chromium
+          npx --yes playwright@1.49.0 screenshot --viewport-size=1080,1350 --wait-for-timeout=2500 "file://$PWD/promo/_card.html" promo/daily.png
+          rm -f promo/_card.html
       - name: 바뀐 게 있으면 커밋
         run: |
           if [ -n "$(git status --porcelain)" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add index.html sitemap.xml robots.txt
+            git add index.html sitemap.xml robots.txt promo/daily.png promo/daily.txt
             git commit -m "검색용 수급 요약 갱신"
             git pull --rebase origin main
             git push
