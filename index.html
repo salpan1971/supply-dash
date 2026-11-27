@@ -2986,7 +2986,7 @@ init();
     $('au-admin').hidden = true; $('au-admin-note').hidden = false; $('tab-admin').style.display = 'none';
     if (!on) {
       $('au-state').textContent = '로그인하지 않음';
-      if (!IS_LOCAL) gate('종목 자료는 회원 전용입니다. 시장 탭 맨 위에서 카카오로 시작하세요(관리자 승인 후 이용).');
+      if (!IS_LOCAL) gate('종목 자료는 회원 전용입니다. 시장 탭 맨 위에서 카카오로 시작하세요.');
       setToken(null); document.dispatchEvent(new CustomEvent('au-change')); return;
     }
     $('au-state').textContent = '확인 중…';
