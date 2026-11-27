@@ -482,23 +482,20 @@
 <style>
   .au-kakao { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; max-width: 320px; padding: 11px 16px; border: 0; border-radius: 8px; background: #FEE500; color: rgba(0,0,0,.85); font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; }
   .au-out { display: flex; align-items: center; gap: 20px; }
-  .au-out.is-in { align-items: flex-start; }
-  .au-out.is-in .au-mascot { width: clamp(110px, 22vw, 170px); margin-top: -8px; }
   .au-main { flex: 0 1 560px; min-width: 0; }
-  .au-mascot { flex: none; width: clamp(140px, 36vw, 260px); height: auto; margin-left: clamp(0px, 6vw, 90px); }
+  .au-mascot { position: absolute; right: 0; bottom: 20px; width: clamp(120px, 22vw, 230px); height: auto; margin: 0; pointer-events: none; }
+  html.tab-market .sd #mk-sum h2 { position: relative; }
   /* 회원 영역 여백 줄이기 */
-  html.tab-market .sd #mk-auth { padding: 24px 0 4px; }
+  html.tab-market .sd #mk-auth { padding: 24px 0 0; }
   @media (max-width: 767px) { html.tab-market .sd #mk-auth { padding-top: 16px; } }
   html.tab-market .sd #mk-auth h2 { margin-bottom: 8px; }
   html.tab-market .sd #mk-auth h2::before { margin-bottom: 6px; }
   html.tab-market .sd #mk-auth h2 small { margin-top: 4px; }
   #mk-auth .au-out { gap: 10px; }
-  #mk-auth .au-mascot { margin-left: clamp(0px, 3vw, 40px); }
   #mk-auth .au-main .note { margin: 4px 0 0; }
   #mk-auth #au-agree-wrap, #mk-auth label.note { margin-top: 6px !important; }
   #mk-auth #au-legacy { margin-top: 2px !important; }
-  #mk-auth .au-out.is-in .au-mascot { margin-top: -4px; }
-  html.tab-market .sd #mk-sum { padding-top: 32px; }
+  html.tab-market .sd #mk-sum { padding-top: 4px; }
   .au-kakao:hover { filter: brightness(.97); } .au-kakao:focus-visible { outline: 2px solid #1b1f27; outline-offset: 2px; } .au-kakao:disabled { opacity: .6; cursor: default; }
 </style>
 </head>
@@ -709,7 +706,6 @@
     <div id="au-in" hidden><span id="au-who"></span> <button type="button" class="btn-sm" id="au-logout">로그아웃</button></div>
     <p class="note" id="au-msg"></p>
     </div>
-    <img class="au-mascot" src="img/ggumbyeol-chart.png" alt="" width="260" height="320" decoding="async">
     </div>
   </section>
   <section class="card" id="admin-card" data-tab="admin">
@@ -721,7 +717,7 @@
     </div>
   </section>
   <section class="card mk" id="mk-sum" data-tab="market">
-    <h2>오늘의 수급 <small id="mk-date"></small></h2>
+    <h2><img class="au-mascot" src="img/ggumbyeol-chart.png" alt="" width="260" height="320" decoding="async">오늘의 수급 <small id="mk-date"></small></h2>
     <div id="mk-line" class="mk-line">불러오는 중…</div>
     <div class="mk-kpis" id="mk-kpis"></div>
     <p class="note" id="mk-note"></p>
